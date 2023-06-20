@@ -1,9 +1,13 @@
 use reqwest::header::USER_AGENT;
 use serde::Deserialize;
+use std::fmt;
 
 #[derive(Deserialize, Debug)]
 pub struct Post {
     pub title: String,
+    pub selftext: Option<String>,
+    pub url: Option<String>,
+    pub thumbnail: Option<String>,
 }
 
 pub struct Subreddit {
@@ -51,6 +55,26 @@ impl Subreddit {
         }
 
         println!("Fetched {} posts", self.posts.len());
+
+        Ok(())
+    }
+}
+
+impl fmt::Display for Post {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Title: {}\n", self.title)?;
+
+        if let Some(selftext) = &self.selftext {
+            write!(f, "Self Text: {}\n", selftext)?;
+        }
+
+        if let Some(url) = &self.url {
+            write!(f, "URL: {}\n", url)?;
+        }
+
+        if let Some(thumbnail) = &self.thumbnail {
+            write!(f, "Thumbnail: {}\n", thumbnail)?;
+        }
 
         Ok(())
     }

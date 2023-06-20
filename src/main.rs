@@ -14,7 +14,7 @@ fn main() {
         subreddits.push(Subreddit::new(subreddit));
     }
 
-    for mut subreddit in subreddits {
+    for subreddit in &mut subreddits {
         if let Err(err) = subreddit.fetch_posts() {
             eprintln!("Failed to fetch posts: {}", err);
         } else {
@@ -22,4 +22,6 @@ fn main() {
             println!("Fetching posts was successful!")
         }
     }
+
+    println!("{}", subreddits[0].posts[3]);
 }
