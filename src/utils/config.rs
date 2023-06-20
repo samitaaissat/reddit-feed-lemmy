@@ -1,33 +1,14 @@
-// Declare the configuration struct and its methods.
-
 use serde::Deserialize;
 use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
-
-// The struct config is loaded from the config.json file.
-// It contains these params:
-/*
-
-{
-    "instance": string,
-    "user": string,
-    "pass": string,
-    "subreddit": [
-        string,
-        string,
-        string
-    ],
-}
-
- */
 
 #[derive(Deserialize, Debug)]
 pub struct Config {
     pub instance: String,
     pub user: String,
     pub pass: String,
-    pub subreddit: Vec<String>,
+    pub subreddits: Vec<String>,
 }
 
 impl Config {
